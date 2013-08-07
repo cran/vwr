@@ -17,7 +17,7 @@ function(x, y=NULL, ...){
     reference.level<-r$reference.level
     odds<-r$odds
     bias.histogram<-histogram(~bias|type,
-    xlab=paste('Bias for',reference.level),
+    xlab=paste('Bias for', reference.level),
     scales=list(
         x=list(alternating=1, limits=c(-1.2,1.2)),
         y=list(alternating=3,limits=c(0,110),axs='i')),

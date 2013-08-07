@@ -8,8 +8,8 @@ Compute average Levenshtein distances}
 \description{
 Compute the average Levenshtein distances between a word and its n nearest neighbors in a lexicon.}
 \usage{
-ald(sources, targets, n, multicore = FALSE)
-old20(sources, targets, multicore = FALSE)
+ald(sources, targets, n, method="levenshtein", parallel = FALSE)
+old20(sources, targets, method="levenshtein", parallel = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,11 +19,13 @@ a list of words for which the average Levenshtein distance should be computed. M
   \item{targets}{
 a list of words containing possible neighbors. Must be of type \code{character}, or convertible to type \code{character} with \code{as.character}.
 }
+  \item{method}{
+specifies the distance function. With "levenshtein", \code{levenshtein.distance} is used, with "levenshtein.damerau" \code{levenshtein.damerau} is used.}
   \item{n}{
 specifies the number of nearest neighbors on which the average should be based. The variant \code{old20} does not take the \code{n} argument (it is fixed to 20). 
 }
-  \item{multicore}{
-with multicore=TRUE, ald will run on multiple cores simultaneously.
+  \item{parallel}{
+with parallel=TRUE, ald will run in parallel an multiple cores. The number of parallel processes is specified by \code{detectCores(logical = FALSE)}.
 }
 }
 \details{
@@ -38,9 +40,6 @@ Yarkoni, T., Balota, D., & Yap, M. (2008). Moving beyond Coltheart’s N: A new 
 }
 \author{
 Emmanuel Keuleers
-}
-\note{
-%%  ~~further notes~~
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

@@ -1,12 +1,8 @@
 hamming.distance <-
-function(source, targets){
-    if (class(targets)!='preprocessed.targets'){
-        targets<-tpreprocess(targets)
-    }
-    indexes<-which(targets$n.chars==nchar(source))
-    source<-unlist(strsplit(as.character(source),c()))
-    distances<-unlist(lapply(targets$spelling[indexes],function(target) return(sum(source!=target))))
-    names(distances)<-targets$names[indexes]
+  function(xsource, targets){
+    valid.indexes<-which(nchar(targets)==nchar(xsource))
+    distances<-rep(NA, length(targets))
+    distances[valid.indexes]<-stringdist(xsource, targets[valid.indexes], method='hamming')
+    names(distances)<-targets
     return(distances)
 }
-

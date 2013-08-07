@@ -9,15 +9,7 @@ A list of 293,749 Dutch words without spaces or dashes from the CELEX lexical da
 \format{
 A \code{character} vector.
 }
-\details{
-%%  ~~ If necessary, more details than the __description__ above ~~
-}
-\source{
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
-}
-\references{
-Baayen, R. H., Piepenbrock, R., & Gulikers, L. (1995). The CELEX lexical database (release 2) [CD-ROM]. Philadelphia: Linguistic Data Consortium, University of Pennsylvania.
-}
+\source{Baayen, R. H., Piepenbrock, R., & Gulikers, L. (1995). The CELEX lexical database (release 2) [CD-ROM]. Philadelphia: Linguistic Data Consortium, University of Pennsylvania.}
 \examples{
 data(dutch.words)
 }

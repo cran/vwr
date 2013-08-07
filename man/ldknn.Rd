@@ -1,8 +1,6 @@
 \name{ldknn}
 \alias{ldknn}
 \alias{ld1nn}
-\alias{plot.ld1nn.run}
-\alias{print.ld1nn.run}
 \title{
 Run the ldknn algorithm
 }
@@ -10,7 +8,7 @@ Run the ldknn algorithm
 The ldknn algorithm is used to detect bias in the composition of a lexical decison task, using k-nearest neighbor classification and the Levenshtein distance metric.
 }
 \usage{
-ldknn(stimuli, types, reference, k = 1, multicore = FALSE)
+ldknn(stimuli, types, reference, k = 1, method='levenshtein', parallel = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,17 +21,23 @@ a character string giving the reference level. Must be a level of the factor in 
   \item{k}{
 a value for the k parameter. Set to 1 by default.
 }
-  \item{multicore}{
-with multicore=TRUE, ldknn will run on multiple cores simultaneously.
-}
+  \item{method}{
+    \itemize{
+    \item{"levenshtein": uses \code{\link{levenshtein.distance} to calculate distances}}
+    \item{'levenshtein.damerau': uses \code{\link{levenshtein.damerau.distance}} to calculate distances}
+    }
+  }
+ 
+  \item{parallel}{
+  with parallel=TRUE, \code{ldknn} will run in parallel an multiple cores. The number of parallel processes is specified by \code{detectCores(logical = FALSE)}.}
 }
 \details{
 Combining k nearest neighbor classification with the Levenshtein distance produces an algorithm  which can be described as follows. 
 For an experiment containing a number of stimuli, which can be words or nonwords:
 \enumerate{
-\item Compute the Levenshtein distances between the currently presented stimulus and all previously presented stimuli.  
-\item Identify the previously presented stimuli that are at the k nearest distances from the current stimulus.
-\item Compute the probability of a word response for the given stimulus based on the relative frequency of words among the nearest neighbors.
+\item{Compute the Levenshtein distances between the currently presented stimulus and all previously presented stimuli.}  
+\item{Identify the previously presented stimuli that are at the k nearest distances from the current stimulus.}
+\item{Compute the probability of a word response for the given stimulus based on the relative frequency of words among the nearest neighbors.}
 }
 }
 \value{
@@ -44,18 +48,14 @@ A list with class \code{ldknn.run}.
 \code{plot} and \code{print} methods are available for objects of class \code{ld1nn.run}
 }
 \references{
-Keuleers, E., & Brysbaert, M. (manuscript submitted for publication). Detecting inherent bias in lexical decision experiments with the LD1NN algorithm.
-}
+Keuleers, E., & Brysbaert, M. (2011). Detecting inherent bias in lexical decision experiments with the LD1NN algorithm. \emph{The Mental Lexicon, 6}(1), 34–52.}
 \author{
 Emmanuel Keuleers}
-\note{
-%%  ~~further notes~~
-}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{levenshtein.distance}}
+\code{\link{levenshtein.distance}, \link{levenshtein.damerau.distance}}
 }
 \examples{
 data(english.words)

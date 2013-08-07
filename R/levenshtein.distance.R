@@ -1,6 +1,6 @@
 levenshtein.distance <-
-function(source, targets){
-    distances<-levenshteinDist(source, targets)
+function(xsource, targets){
+    distances<-stringdist(xsource, targets, method='lv')
     names(distances)<-targets
     return(distances)
 }

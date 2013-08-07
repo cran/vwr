@@ -7,34 +7,32 @@ Compute Levenshtein distances }
 \description{
 Compute the Levenshtein distance between two character strings (the minimal number of insertions, deletions or replacements required to transform one string into the other)}
 \usage{
-levenshtein.distance(source, targets)
+levenshtein.distance(xsource, targets)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{source}{
+  \item{xsource}{
 A character string to compute the Levenshtein distance from.
 }
   \item{targets}{
 A list of words to compute the Levenshtein distance to. Must be of type \code{character}, or convertible to type \code{character} with \code{as.character}.}
 }
 \details{
-Uses the \code{\link{levenshteinDist}} function from the \code{RecordLinkage} package and adds target names to the vector with distances.}
+The distance computation is performed by {\link{stringdist}} with method="lv".
+}
 \value{
 An integer vector containing Levenshtein distances, with names corresponding to targets.
 }
 \references{
-%% ~put references to the literature/web site here ~
-}
+Levenshtein, V. I. (1966, February). Binary codes capable of correcting deletions, insertions and reversals. In Soviet physics doklady (Vol. 10, p. 707).}
 \author{
 Emmanuel Keuleers}
-\note{
-%%  ~~further notes~~
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{levenshtein.neighbors}},\code{\link{levenshteinDist}}, \code{\link{ald}} 
+\code{\link{levenshtein.neighbors}},\code{\link{stringdist}}, \code{\link{ald}}, \code{\link{levenshtein.damerau.distance} } 
 }
 \examples{
 data(french.words)

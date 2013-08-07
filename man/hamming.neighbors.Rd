@@ -15,27 +15,20 @@ hamming.neighbors(source, targets)
 A character string.
 }
   \item{targets}{
-Potential Hamming neighbors. Must be of type \code{character}, or convertible to type \code{character} with \code{as.character}. Targets will be converted internally with \code{\link{tpreprocess}}, but preprocessing can also be done before passing targets to the function.}
+Potential Hamming neighbors.}
 }
 
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 A list of neighbors at each distance.}
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
 Emmanuel Keuleers}
-\note{
-%%  ~~further notes~~
-}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{hamming.distance}}
+\code{\link{hamming.distance}, \link{stringdist}}
 }
 \examples{
 data(english.words)

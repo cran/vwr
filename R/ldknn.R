@@ -1,8 +1,9 @@
 ldknn <-
-function(stimuli, types, reference, k=1, multicore=FALSE){
+function(stimuli, types, reference, k=1, method='levenshtein', parallel=FALSE){
+    distance.function<-which.distance.function(method)
     n<-length(stimuli)
     do.one<-function(index, stimuli, k){
-        distances<-levenshteinDist(stimuli[index],stimuli[1:index-1])
+        distances<-distance.function(stimuli[index],stimuli[1:index-1])
         unique.distances<-sort(unique(distances))
         minimum.distance<-unique.distances[k]
         indexes<-which(distances<=minimum.distance)
@@ -10,8 +11,9 @@ function(stimuli, types, reference, k=1, multicore=FALSE){
         probability<-sum(distribution==reference)/length(distribution)
         return(probability)
     }
-    if(multicore==TRUE){
-        probabilities<-unlist(mclapply(2:n, do.one, stimuli, k))
+    if(parallel==TRUE){
+        ncores=detectCores(logical = FALSE)
+        probabilities<-unlist(mclapply(2:n, do.one, stimuli, k, mc.cores=ncores))
     }
     else{
         probabilities<-unlist(lapply(2:n, do.one, stimuli, k))

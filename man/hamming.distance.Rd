@@ -7,37 +7,35 @@ Compute Hamming distances
 \description{
 Compute the Hamming distance (the number of non-overlapping characters) between words of the same length.}
 \usage{
-hamming.distance(source, targets)
+hamming.distance(xsource, targets)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{source}{
+  \item{xsource}{
 A character string to compute the Hamming distance from.
 }
   \item{targets}{
-Words to which the Hamming distance must be computed. Must be of type \code{character}, or convertible to type \code{character} with \code{as.character}. Targets will be converted internally with \code{\link{tpreprocess}}, but preprocessing can also be done before passing targets to the function.}
+Words to which the Hamming distance must be computed. Must be of type \code{character}, or convertible to type \code{character} with \code{as.character}.}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The actual distance computation is performed by {\link{stringdist}} with "method='h'". 
 }
 \value{
 An integer vector containing Hamming distances, with names corresponding to targets. Since the Hamming distances is only defined between words of the same length,  the output of hamming.distance is only guaranteed to have the same length as \code{targets} if all \code{targets} have the same length as \code{source}. 
 }
 \references{
-%% ~put references to the literature/web site here ~
-}
+Hamming, R. W. (1950). Error detecting and error correcting codes. Bell System technical journal, 29(2), 147-160.}
 \author{
 Emmanuel Keuleers}
-\note{
-%%  ~~further notes~~
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{hamming.neighbors}}, \code{\link{coltheart.N}}
+\code{\link{stringdist}, \link{hamming.neighbors}}, \code{\link{coltheart.N}}
 }
 \examples{
 data(english.words)
+targets<-english.words[which(nchar(english.words)==5)]
 hamming.distance('electroencephalogram',english.words)
 }

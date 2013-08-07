@@ -1,6 +1,14 @@
 ald <-
-function(sources, targets, n, multicore=FALSE){
-    if (typeof(sources)!='sources'){
+function(sources, targets, n, method='levenshtein', parallel=FALSE){
+  
+  if (method=="levenshtein"){
+    distance.function=levenshtein.distance
+  }
+  if (method=="levenshtein.damerau"){
+    distance.function=levenshtein.damerau.distance
+  }
+  
+  if (typeof(sources)!='character'){
         sources<-as.character(sources)
     }
 
@@ -16,7 +24,7 @@ function(sources, targets, n, multicore=FALSE){
         unique.distances<-sort(unique(min.distances))
         for(current.distance in unique.distances){
             indexes<-which(min.distances==current.distance)
-            distances[indexes]<-levenshteinDist(source,targets[indexes])
+            distances[indexes]<-distance.function(source,targets[indexes])
             dfreq<-tabulate(distances)
             cutoff.index<-max(which(cumsum(dfreq)<n)+1,1)
             if (cutoff.index<current.distance+1){
@@ -26,8 +34,9 @@ function(sources, targets, n, multicore=FALSE){
         }
         return(mean(rep(seq_along(dfreq),dfreq)[1:n]))
     }
-    if (multicore==TRUE){
-        results<-unlist(mclapply(sources, do.one, targets, target.lengths, n))
+    if (parallel==TRUE){
+        ncores = detectCores(logical = FALSE)
+        results<-unlist(mclapply(sources, do.one, targets, target.lengths, n, mc.cores=ncores))
         names(results)<-sources
         }
     else{
